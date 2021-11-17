@@ -16,12 +16,12 @@ export TEMPLATE_IMAGE="gcr.io/$GCP_PROJECT/dataflow-twitter:latest"
 export TEMPLATE_PATH="gs://$GCP_BUCKET/dataflow-templates/dataflow-twitter.json"
 ```
 
-###Build flex template docker image
+### Build flex template docker image
 ```
 gcloud builds submit --tag $TEMPLATE_IMAGE .
 ```
 
-###Build the flex template
+### Build the flex template
 ```
 gcloud dataflow flex-template build $TEMPLATE_PATH \
        --image "$TEMPLATE_IMAGE" \
