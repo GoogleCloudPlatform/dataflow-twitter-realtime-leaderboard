@@ -28,8 +28,24 @@ gcloud dataflow flex-template build $TEMPLATE_PATH \
        --sdk-language "PYTHON"
 ```
 
-## Running the flex template on Dataflow
 
+### Running a build with cloudbuild.yaml config
+```
+gcloud builds submit --config=cloudbuild.yaml --project=$GCP_PROJECT --substitutions=_TEMPLATE_IMAGE="gcr.io/$GCP_PROJECT/dataflow-twitter:latest",_GCP_BUCKET="your-project-bucket-name"
+```
+
+## Running the flex template on Dataflow
+```
+gcloud dataflow flex-template run "twitter-beam-`date +%Y%m%d-%H%M%S`" \
+    --template-file-gcs-location "$TEMPLATE_PATH" \
+    --parameters input="gs://$GCP_BUCKET/input/logs.txt" \
+    --parameters output="gs://$GCP_BUCKET/output/rejects.txt" \
+    --parameters bqproject=$GCP_PROJECT \
+    --parameters bqdataset=$BQ_DATASET \
+    --parameters temp_location="gs://$GCP_BUCKET/tmp/" \
+    --region "$REGION" \
+    --project $GCP_PROJECT
+```
 
 ## Contributing
 
