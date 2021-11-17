@@ -12,14 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-python ./src/tweet-process.py \
-    --runner "DataflowRunner" \
-    --job_name "tweet-process-$RANDOM" \
-    --region $REGION \
-    --input "gs://$GCP_BUCKET/input/logs.txt" \
-    --output "gs://$GCP_BUCKET/output/rejects.txt" \
-    --project $GCP_PROJECT \
-    --bqproject $GCP_PROJECT \
-    --bqdataset $BQ_DATASET \
-    --temp_location "gs://$GCP_BUCKET/tmp/" \
-    --save_main_session
+gcloud dataflow flex-template run "twitter-beam-`date +%Y%m%d-%H%M%S`" \
+    --template-file-gcs-location "$TEMPLATE_PATH" \
+    --parameters input="gs://$GCP_BUCKET/input/logs.txt" \
+    --parameters output="gs://$GCP_BUCKET/output/rejects.txt" \
+    --parameters bqproject=$GCP_PROJECT \
+    --parameters bqdataset=$BQ_DATASET \
+    --parameters temp_location="gs://$GCP_BUCKET/tmp/" \
+    --region "$REGION" \
+    --project $GCP_PROJECT

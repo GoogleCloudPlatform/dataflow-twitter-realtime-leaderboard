@@ -20,6 +20,7 @@ from apache_beam import pvalue
 from apache_beam.io import ReadFromText
 from apache_beam.io import WriteToText
 from apache_beam.options.pipeline_options import PipelineOptions
+from apache_beam.options.pipeline_options import SetupOptions
 from apache_beam.io.gcp.internal.clients import bigquery
 
 
@@ -146,6 +147,7 @@ def run(argv=None, save_main_session=True):
     args, beam_args = parser.parse_known_args()
 
     beam_options = PipelineOptions(beam_args)
+    beam_options.view_as(SetupOptions).save_main_session = save_main_session
 
     with beam.Pipeline(options=beam_options) as p:
         lines = p | ReadFromText(args.input)
