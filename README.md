@@ -4,11 +4,11 @@ Example project demonstrating the processing and analysis of unstructured tweet 
 
 ## Contributing
 
-See ["CONTRIBUTING.md"](docs/CONTRIBUTING.md) for details.
+See ["CONTRIBUTING.md"](docs/contributing.md) for details.
 
 ## License
 
-Apache 2.0; see ["LICENSE"](docs/LICENSE) for details.
+Apache 2.0; see ["LICENSE"](LICENSE) for details.
 
 ## Disclaimer
 
